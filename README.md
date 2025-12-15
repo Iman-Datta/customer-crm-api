@@ -34,4 +34,4 @@ This project is being built step by step while learning DRF.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/customer-management-api-drf.git
+git clone https://github.com/Iman-Datta/customer-crm-api.git
