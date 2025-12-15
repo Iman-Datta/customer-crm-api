@@ -48,3 +48,19 @@ def update_patch_customer(request: Request, pk):
         return Response(serializer.data, status=200)
     else:
         return Response(serializer.errors, status=400)
+    
+@api_view(['DELETE'])
+def delete_customer(request, pk):
+    try:
+        customer = Customer.objects.get(pk=pk)
+    except Customer.DoesNotExist:
+        return Response(
+            {"error": "Customer does not exist"},
+            status=404
+        )
+
+    customer.delete()
+    return Response(
+        {"message": "Customer deleted successfully"},
+        status=204
+    )
