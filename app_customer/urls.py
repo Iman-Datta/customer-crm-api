@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from .views import update_patch_customer, display_customers, register_customer
+from .views import update_patch_customer, display_customers, register_customer, delete_customer
 
 urlpatterns = [
     path('', register_customer, name='register_customer'),
     path('updateCustomer/<int:pk>/', update_patch_customer, name='update_Customer'),
     path('displayCustomer/', display_customers, name='display_Customers'),
+    path('deleteCustomer/', delete_customer, name='delete_Customers'),
 ]
