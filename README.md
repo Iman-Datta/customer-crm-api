@@ -1,52 +1,36 @@
 # Customer Management API (DRF)
 
-This project is a backend REST API built using **Django Rest Framework (DRF)**.  
-It is created as part of my learning journey with DRF while working on a real-world
-customer-based project.
-
-The goal of this project is to understand how backend systems work in practice,
-including API design, database interaction, authentication, and data validation.
+This is my first backend project using **Django Rest Framework (DRF)**.  
+I built this project to learn how REST APIs work in Django.
 
 ---
 
-## 🚀 Tech Stack
+## Tech Used
 
 - Python
 - Django
 - Django Rest Framework (DRF)
-- SQLite (for development)
+- SQLite
 - Git & GitHub
 
 ---
 
-## 📌 Project Features (Planned)
+## Features
 
 - Customer CRUD operations (Create, Read, Update, Delete)
-- RESTful API endpoints
-- JSON-based API responses
-- Serializer-based validation
-- Admin panel for managing data
-- Authentication & permissions (later stage)
-- Token/JWT authentication (future)
-- Pagination and filtering (future)
+- REST API using DRF
+- JSON responses
 
 ---
 
-## 🛠️ Project Status
+## Project Status
 
-🟡 **Stage 1 – Initial Setup**
-- [x] GitHub repository created
-- [x] Django project initialized
-- [ ] Customer model
-- [ ] Serializers
-- [ ] API views
-- [ ] URL routing
-
-This project will be updated step-by-step as I progress in my DRF journey.
+🚧 Under Development  
+This project is being built step by step while learning DRF.
 
 ---
 
-## ⚙️ Installation & Setup
+## Setup
 
 1. Clone the repository:
 ```bash
