@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
     # Custom App
     'app_customer.apps.AppCustomerConfig',
+    'app_customer_cbv.apps.AppCustomerCbvConfig'
 ]
 
 MIDDLEWARE = [
