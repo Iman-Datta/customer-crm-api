@@ -45,3 +45,13 @@ class UpdateCustomerPatchView(APIView):
             serializer.save()
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
+
+class DeleteCustomerView(APIView):
+    def delete (self, request: Request, pk):
+        try:
+            customer = Customer.objects.get(pk=pk)
+        except Customer.DoesNotExist:
+            return Response({"error": "Customer does not exist"},status=404)
+
+        customer.delete()
+        return Response({"message": "Customer deleted successfully"},status=204)
