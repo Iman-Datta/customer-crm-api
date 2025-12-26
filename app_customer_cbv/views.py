@@ -32,3 +32,16 @@ class DisplayCustomerView(APIView):
         customers = Customer.objects.all()
         serializer = CustomerSerializer(customers, many=True)
         return Response(serializer.data, status=200)
+    
+class UpdateCustomerPatchView(APIView):
+    def patch(self, request: Request, pk):
+        try:
+            customer = Customer.objects.get(pk=pk)
+        except Customer.DoesNotExist:
+            return Response({'error':'Customet doesnot exist'}, status=400)
+        
+        serializer = CustomerSerializer(customer, data = request.data, partial= True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        return Response(serializer.errors, status=400)
