@@ -48,6 +48,34 @@ def update_patch_customer(request: Request, pk):
         return Response(serializer.data, status=200)
     else:
         return Response(serializer.errors, status=400)
+
+
+@api_view(['PUT'])
+def update_put_customer(request: Request, pk):
+    try:
+        customer: Customer = Customer.objects.get(pk=pk)
+    except Customer.DoesNotExist:
+        return Response(
+            {'error': 'Customer does not exist'},
+            status=404
+        )
+
+    serializer: CustomerSerializer = CustomerSerializer(
+        customer,
+        data=request.data,   # partial=False by default
+    )
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {
+                'message': 'Customer updated successfully',
+                'customer': serializer.data
+            },
+            status=200
+        )
+    else:
+        return Response(serializer.errors, status=400)
     
 @api_view(['DELETE'])
 def delete_customer(request, pk):
