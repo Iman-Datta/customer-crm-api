@@ -4,6 +4,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from app_customer.models import Customer
 from app_customer.serializers import CustomerSerializer
+from rest_framework import status
 
 class RegisterCustomerView(APIView):
     def post (self, request: Request):
@@ -59,12 +60,42 @@ class DeleteCustomerView(APIView):
             return Response({'error' : 'Customer not found'}, status=404)
         except Exception as e: # Base class
             return Response({'error' : str(e)}, status=500)
-    
 
-    # def delete (self, request: Request, pk):
-    #     try:
-    #         customer = Customer.objects.get(pk=pk)
-    #         customer.delete()
-    #         return Response({"message": "Customer deleted successfully"},status=204)
-    #     except Customer.DoesNotExist:
-    #         return Response({"error": "Customer does not exist"},status=404)
+class DeleteCustomerViewUrl(APIView):
+        def delete (self,pk):
+            try:
+                customer = Customer.objects.get(pk=pk)
+                customer.delete()
+                return Response({"message": "Customer deleted successfully"},status=204)
+            except Customer.DoesNotExist:
+                return Response({"error": "Customer does not exist"},status=404)
+            except Exception as e:
+                return Response({"error": str(e)},status=500)
+
+class UpdateCustomerPutView(APIView):
+    def put(self, request: Request, pk):
+        try:
+            customer = Customer.objects.get(pk=pk)
+        except Customer.DoesNotExist:
+            return Response(
+                {'error': 'Customer does not exist'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # PUT = full update (partial=False by default)
+        serializer = CustomerSerializer(
+            customer,
+            data=request.data
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
