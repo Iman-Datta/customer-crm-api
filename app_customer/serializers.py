@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Customer
 
 class CustomerSerializer(serializers.ModelSerializer):
-    created_up = serializers.DateTimeField(format="%d %B %Y, %I:%M %p")
+    created_up = serializers.DateTimeField(format="%d %B %Y, %I:%M %p", read_only=True)
 
     class Meta:
         model = Customer

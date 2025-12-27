@@ -50,3 +50,6 @@ class CustomerViewSet(ViewSet):
             {"message": "Customer deleted successfully"},
             status=status.HTTP_200_OK
         )
+    
+    def update(self, request, pk=None):
+        pass

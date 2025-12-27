@@ -47,11 +47,24 @@ class UpdateCustomerPatchView(APIView):
         return Response(serializer.errors, status=400)
 
 class DeleteCustomerView(APIView):
-    def delete (self, request: Request, pk):
+    def delete(self, request: Request):
+        id = request.data.get('id')
+        if not id:
+            return Response({'error' : 'id not found'}, status=400)
         try:
-            customer = Customer.objects.get(pk=pk)
-        except Customer.DoesNotExist:
-            return Response({"error": "Customer does not exist"},status=404)
+            customer = Customer.objects.get(pk=id)
+            customer.delete()
+            return Response({'message' : 'Customer deleted successfully'}, status=200)
+        except Customer.DoesNotExist: # Dirived class
+            return Response({'error' : 'Customer not found'}, status=404)
+        except Exception as e: # Base class
+            return Response({'error' : str(e)}, status=500)
+    
 
-        customer.delete()
-        return Response({"message": "Customer deleted successfully"},status=204)
+    # def delete (self, request: Request, pk):
+    #     try:
+    #         customer = Customer.objects.get(pk=pk)
+    #         customer.delete()
+    #         return Response({"message": "Customer deleted successfully"},status=204)
+    #     except Customer.DoesNotExist:
+    #         return Response({"error": "Customer does not exist"},status=404)
