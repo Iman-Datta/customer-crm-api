@@ -52,4 +52,22 @@ class CustomerViewSet(ViewSet):
         )
     
     def update(self, request, pk=None):
-        pass
+        customer = get_object_or_404(Customer, pk=pk)
+
+        # PUT = full update (all fields required)
+        serializer = CustomerSerializer(
+            customer,
+            data=request.data
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
