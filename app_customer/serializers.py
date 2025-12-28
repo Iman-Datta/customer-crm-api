@@ -3,10 +3,11 @@ from .models import Customer
 
 class CustomerSerializer(serializers.ModelSerializer):
     created_up = serializers.DateTimeField(format="%d %B %Y, %I:%M %p", read_only=True)
+    updated_at = serializers.DateTimeField(format="%d %B %Y, %I:%M %p", read_only=True)
 
     class Meta:
         model = Customer
-        fields = ('id', 'name', 'address', 'department', 'created_up')
+        fields = ('id', 'name', 'address', 'department', 'created_up', 'updated_at')
 
 
 
